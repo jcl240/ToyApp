@@ -16,7 +16,8 @@
         android:id="@+id/imageButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:src="@android:drawable/ic_dialog_map" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -39,5 +40,15 @@
         android:layout_alignParentStart="true"
         android:text="Your Cart : "
         android:autoText="true"
+        android:background="#d7ccc8" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Total: $"
         android:background="#d7ccc8" />
 </RelativeLayout>
