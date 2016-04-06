@@ -17,7 +17,8 @@
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/button3"
-        android:layout_toStartOf="@+id/button3" />
+        android:layout_toStartOf="@+id/button3"
+        android:onClick="checkOut" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -27,13 +28,14 @@
         android:id="@+id/button3"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="cancel" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:src="@mipmap/ic_shoppingCart"
+        android:src="@mipmap/ic_shop"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
