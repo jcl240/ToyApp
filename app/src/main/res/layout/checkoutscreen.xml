@@ -18,7 +18,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:src="@android:drawable/ic_dialog_map"
-        android:contentDescription="mapButton" />
+        android:contentDescription="mapButton"
+        android:onClick="goTo" />
 
     <ListView
         android:layout_width="wrap_content"
