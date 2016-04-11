@@ -44,26 +44,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/toyImages"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_below="@+id/button3"
+        android:layout_below="@+id/toyName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/toyName"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_below="@+id/toyPrice2"
-        android:layout_toRightOf="@+id/toyImages"
-        android:layout_toEndOf="@+id/toyImages" />
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_toEndOf="@+id/editText2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button3" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/toyPrice"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_below="@+id/button3"
-        android:layout_toRightOf="@+id/toyImages"
-        android:layout_toEndOf="@+id/toyImages" />
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignStart="@+id/button2"
+        android:layout_alignTop="@+id/toyImages"
+        android:layout_alignBottom="@+id/toyImages" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -76,16 +78,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/toyName2"
-        android:layout_below="@+id/toyImages2"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/toyImages2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/toyImages2"
-        android:layout_alignLeft="@id/toyName2"
         android:id="@+id/toyPrice2"
         android:layout_alignRight="@+id/toyName"
-        android:layout_alignEnd="@+id/toyName" />
+        android:layout_alignEnd="@+id/toyName"
+        android:layout_below="@+id/toyName2"
+        android:layout_toRightOf="@+id/button2"
+        android:layout_toEndOf="@+id/button2" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -112,9 +117,9 @@
         android:id="@+id/toyPrice3"
         android:layout_above="@+id/toyName3"
         android:layout_alignRight="@+id/toyImages"
-        android:layout_alignTop="@+id/toyName3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/toyImages3"
+        android:layout_alignLeft="@+id/toyPrice2"
+        android:layout_alignStart="@+id/toyPrice2" />
 
     <TextView
         android:layout_width="wrap_content"
