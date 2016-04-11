@@ -22,11 +22,14 @@ import java.util.ArrayList;
 
 public class searchActivity extends AppCompatActivity {
 
+    public String searchQuery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchscreen);
         Intent intent=getIntent();
+        Bundle p = getIntent().getExtras();
+        searchQuery = p.getString("searchQuery");
         new getToyData().execute();
     }
 
@@ -148,32 +151,37 @@ public class searchActivity extends AppCompatActivity {
     {
         ToyList toys=new ToyList(toyByte, byteLength);
 
-        ImageView view=(ImageView)findViewById(R.id.toyImages);
-        view.setImageBitmap(toys.ToyList.get(0).toyImage);
-        view.setVisibility(view.VISIBLE);
-        TextView viewT=(TextView)findViewById(R.id.toyName);
-        viewT.setText(toys.ToyList.get(0).toyName);
-        TextView viewP=(TextView)findViewById(R.id.toyPrice);
-        viewP.setText(Integer.toString(toys.ToyList.get(0).toyPrice));
+        if(toys.ToyList.get(0).toyName.contains(searchQuery)) {
+            ImageView view = (ImageView) findViewById(R.id.toyImages);
+            view.setImageBitmap(toys.ToyList.get(0).toyImage);
+            view.setVisibility(view.VISIBLE);
+            TextView viewT = (TextView) findViewById(R.id.toyName);
+            viewT.setText(toys.ToyList.get(0).toyName);
+            TextView viewP = (TextView) findViewById(R.id.toyPrice);
+            viewP.setText(Integer.toString(toys.ToyList.get(0).toyPrice));
+        }
         //Toy1
 
-        ImageView view2=(ImageView)findViewById(R.id.toyImages2);
-        view2.setImageBitmap(toys.ToyList.get(1).toyImage);
-        view2.setVisibility(view2.VISIBLE);
-        TextView viewT2=(TextView) findViewById(R.id.toyName2);
-        viewT2.setText(toys.ToyList.get(1).toyName);
-        TextView viewP2=(TextView) findViewById(R.id.toyPrice2);
-        viewP2.setText(Integer.toString(toys.ToyList.get(1).toyPrice));
+        if(toys.ToyList.get(1).toyName.contains(searchQuery)) {
+            ImageView view2 = (ImageView) findViewById(R.id.toyImages2);
+            view2.setImageBitmap(toys.ToyList.get(1).toyImage);
+            view2.setVisibility(view2.VISIBLE);
+            TextView viewT2 = (TextView) findViewById(R.id.toyName2);
+            viewT2.setText(toys.ToyList.get(1).toyName);
+            TextView viewP2 = (TextView) findViewById(R.id.toyPrice2);
+            viewP2.setText(Integer.toString(toys.ToyList.get(1).toyPrice));
+        }
         //Toy2
-
-        ImageView view3=(ImageView)findViewById(R.id.toyImages3);
-        view3.setImageBitmap(toys.ToyList.get(2).toyImage);
-        view3.setVisibility(view3.VISIBLE);
-        TextView viewT3=(TextView) findViewById(R.id.toyName3);
-        viewT3.setText(toys.ToyList.get(2).toyName);
-        TextView viewP3=(TextView)findViewById(R.id.toyPrice3);
-        viewP3.setText(Integer.toString(toys.ToyList.get(2).toyPrice));
-        //Toy3
+        if(toys.ToyList.get(2).toyName.contains(searchQuery)) {
+            ImageView view3 = (ImageView) findViewById(R.id.toyImages3);
+            view3.setImageBitmap(toys.ToyList.get(2).toyImage);
+            view3.setVisibility(view3.VISIBLE);
+            TextView viewT3 = (TextView) findViewById(R.id.toyName3);
+            viewT3.setText(toys.ToyList.get(2).toyName);
+            TextView viewP3 = (TextView) findViewById(R.id.toyPrice3);
+            viewP3.setText(Integer.toString(toys.ToyList.get(2).toyPrice));
+            //Toy3
+        }
     }
 
 
