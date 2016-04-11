@@ -1,19 +1,30 @@
 package programming.advanced.toyapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 public class checkoutActivity extends AppCompatActivity {
+
+    ArrayList<Toy> cart = new ArrayList<Toy>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkoutscreen);
+
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            cart = (ArrayList<Toy>) extras.get("shoppingCart");
+        }
     }
 
     public void goTo (View view) {
@@ -26,40 +37,32 @@ public class checkoutActivity extends AppCompatActivity {
         startActivity(launchBrowser);
     }
 
-//    public void makeToys()
-//    {
-//        searchActivity.ToyList toys;
-//
-//        if(toys.ToyList.get(0).toyName) {
-//            ImageView view = (ImageView) findViewById(R.id.checkouttoyImages);
-//            view.setImageBitmap(toys.ToyList.get(0).toyImage);
-//            view.setVisibility(view.VISIBLE);
-//            TextView viewT = (TextView) findViewById(R.id.checkouttoyName);
-//            viewT.setText(toys.ToyList.get(0).toyName);
-//            TextView viewP = (TextView) findViewById(R.id.checkouttoyPrice);
-//            viewP.setText(Integer.toString(toys.ToyList.get(0).toyPrice));
-//        }
-//        //Toy1
-//
-//        if(toys.ToyList.get(1).toyName.toLowerCase().contains(searchQuery.toLowerCase())) {
-//            ImageView view2 = (ImageView) findViewById(R.id.checkouttoyImages2);
-//            view2.setImageBitmap(toys.ToyList.get(1).toyImage);
-//            view2.setVisibility(view2.VISIBLE);
-//            TextView viewT2 = (TextView) findViewById(R.id.checkouttoyName2);
-//            viewT2.setText(toys.ToyList.get(1).toyName);
-//            TextView viewP2 = (TextView) findViewById(R.id.checkouttoyPrice2);
-//            viewP2.setText(Integer.toString(toys.ToyList.get(1).toyPrice));
-//        }
-//        //Toy2
-//        if(toys.ToyList.get(2).toyName.toLowerCase().contains(searchQuery.toLowerCase())){
-//            ImageView view3 = (ImageView) findViewById(R.id.checkouttoyImages3);
-//            view3.setImageBitmap(toys.ToyList.get(2).toyImage);
-//            view3.setVisibility(view3.VISIBLE);
-//            TextView viewT3 = (TextView) findViewById(R.id.checkouttoyName3);
-//            viewT3.setText(toys.ToyList.get(2).toyName);
-//            TextView viewP3 = (TextView) findViewById(R.id.checkouttoyPrice3);
-//            viewP3.setText(Integer.toString(toys.ToyList.get(2).toyPrice));
-//            //Toy3
-//        }
- //   }
+    public class Toy
+    {
+        private String toyName=null;
+        private Bitmap toyImage=null;
+        private int toyPrice=0;
+
+        public Toy(byte[] toyByteArray)
+        {
+            ByteBuffer toyBuffer=ByteBuffer.wrap(toyByteArray);
+            int nameLength=toyBuffer.getInt();
+            byte[] namebuffer=new byte[nameLength];
+            toyBuffer.get(namebuffer, 0, nameLength);
+            this.toyName=new String(namebuffer);
+
+            this.toyPrice=toyBuffer.getInt();
+
+            int imageLength=toyBuffer.getInt();
+            Bitmap toyBitMap=null;
+            final byte[] imagebuffer=new byte[imageLength];
+            toyBuffer.get(imagebuffer, 0, imageLength);
+            toyImage= BitmapFactory.decodeByteArray(imagebuffer, 0, imagebuffer.length);
+        }
+
+        public Toy(String name, int price) {
+            toyName = name;
+            toyPrice = price;
+        }
+    }
 }
