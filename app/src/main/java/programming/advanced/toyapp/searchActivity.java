@@ -1,15 +1,25 @@
 package programming.advanced.toyapp;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.View.OnLongClickListener;
+import android.graphics.drawable.Drawable;
+import android.graphics.Canvas;
+import android.view.View.OnDragListener;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -22,19 +32,22 @@ import java.util.ArrayList;
 
 public class searchActivity extends AppCompatActivity {
 
-    public String searchQuery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.searchscreen);
         Intent intent=getIntent();
-        Bundle p = getIntent().getExtras();
-        searchQuery = p.getString("searchQuery");
+
+        View iView = findViewById(R.id.imageView);
+        iView.setOnDragListener(dragListener);
         new getToyData().execute();
     }
 
     byte[] toyByte=null;
     int byteLength=0;
+
+    ToyList inventory;
+    ArrayList<Toy> cart = new ArrayList<Toy>();
 
     public void checkOut(View view)
     {
@@ -42,7 +55,7 @@ public class searchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(searchActivity.this, checkoutActivity.class);
-            //    intent.putExtra("cart", );
+                intent.putExtra("shoppingCart", cart);
                 searchActivity.this.startActivity(intent);
             }
         });
@@ -149,41 +162,109 @@ public class searchActivity extends AppCompatActivity {
 
     public void makeToys(byte[] toyByte, int byteLength)
     {
-        ToyList toys=new ToyList(toyByte, byteLength);
+        ToyList toys = new ToyList(toyByte, byteLength);
+        inventory = toys;
 
-        if(toys.ToyList.get(0).toyName.toLowerCase().contains(searchQuery.toLowerCase())) {
-            ImageView view = (ImageView) findViewById(R.id.toyImages);
-            view.setImageBitmap(toys.ToyList.get(0).toyImage);
-            view.setVisibility(view.VISIBLE);
-            TextView viewT = (TextView) findViewById(R.id.toyName);
-            viewT.setText(toys.ToyList.get(0).toyName);
-            TextView viewP = (TextView) findViewById(R.id.toyPrice);
-            viewP.setText(Integer.toString(toys.ToyList.get(0).toyPrice));
-        }
+        ImageView view=(ImageView)findViewById(R.id.toyImages);
+        view.setImageBitmap(toys.ToyList.get(0).toyImage);
+        view.setVisibility(view.VISIBLE);
+        TextView viewT=(TextView)findViewById(R.id.toyName);
+        viewT.setText(toys.ToyList.get(0).toyName);
+        TextView viewP=(TextView)findViewById(R.id.toyPrice);
+        viewP.setText(Integer.toString(toys.ToyList.get(0).toyPrice));
         //Toy1
 
-        if(toys.ToyList.get(1).toyName.toLowerCase().contains(searchQuery.toLowerCase())) {
-            ImageView view2 = (ImageView) findViewById(R.id.toyImages2);
-            view2.setImageBitmap(toys.ToyList.get(1).toyImage);
-            view2.setVisibility(view2.VISIBLE);
-            TextView viewT2 = (TextView) findViewById(R.id.toyName2);
-            viewT2.setText(toys.ToyList.get(1).toyName);
-            TextView viewP2 = (TextView) findViewById(R.id.toyPrice2);
-            viewP2.setText(Integer.toString(toys.ToyList.get(1).toyPrice));
-        }
+        ImageView view2=(ImageView)findViewById(R.id.toyImages2);
+        view2.setImageBitmap(toys.ToyList.get(1).toyImage);
+        view2.setVisibility(view2.VISIBLE);
+        TextView viewT2=(TextView) findViewById(R.id.toyName2);
+        viewT2.setText(toys.ToyList.get(1).toyName);
+        TextView viewP2=(TextView) findViewById(R.id.toyPrice2);
+        viewP2.setText(Integer.toString(toys.ToyList.get(1).toyPrice));
         //Toy2
-        if(toys.ToyList.get(2).toyName.toLowerCase().contains(searchQuery.toLowerCase())){
-            ImageView view3 = (ImageView) findViewById(R.id.toyImages3);
-            view3.setImageBitmap(toys.ToyList.get(2).toyImage);
-            view3.setVisibility(view3.VISIBLE);
-            TextView viewT3 = (TextView) findViewById(R.id.toyName3);
-            viewT3.setText(toys.ToyList.get(2).toyName);
-            TextView viewP3 = (TextView) findViewById(R.id.toyPrice3);
-            viewP3.setText(Integer.toString(toys.ToyList.get(2).toyPrice));
-            //Toy3
-        }
+
+        ImageView view3=(ImageView)findViewById(R.id.toyImages3);
+        view3.setImageBitmap(toys.ToyList.get(2).toyImage);
+        view3.setVisibility(view3.VISIBLE);
+        TextView viewT3=(TextView) findViewById(R.id.toyName3);
+        viewT3.setText(toys.ToyList.get(2).toyName);
+        TextView viewP3=(TextView)findViewById(R.id.toyPrice3);
+        viewP3.setText(Integer.toString(toys.ToyList.get(2).toyPrice));
+        //Toy3
+
+        view.setOnLongClickListener(longCLickListener);
+        view2.setOnLongClickListener(longCLickListener);
+        view3.setOnLongClickListener(longCLickListener);
     }
 
+    OnDragListener dragListener = new OnDragListener() {
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            int dragEvent = event.getAction();
+
+            switch(dragEvent){
+                case DragEvent.ACTION_DROP:
+                    ImageView draggedImage = (ImageView) event.getLocalState();
+
+                    if (draggedImage == findViewById(R.id.toyImages)) {
+                        Toy newItem = new Toy(inventory.ToyList.get(0).toyName, inventory.ToyList.get(0).toyPrice);
+                        cart.add(newItem);
+                    }
+
+                    if (draggedImage == findViewById(R.id.toyImages2)) {
+                        Toy newItem = new Toy(inventory.ToyList.get(1).toyName, inventory.ToyList.get(1).toyPrice);
+                        cart.add(newItem);
+                    }
+
+                    if (draggedImage == findViewById(R.id.toyImages3)) {
+                        Toy newItem = new Toy(inventory.ToyList.get(2).toyName, inventory.ToyList.get(3).toyPrice);
+                        cart.add(newItem);
+                    }
+
+                    Toast.makeText(searchActivity.this, "Item added to cart!", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            return true;
+        }
+    };
+
+    OnLongClickListener longCLickListener = new OnLongClickListener(){
+        @Override
+        public boolean onLongClick(View v){
+            ClipData clipData = ClipData.newPlainText("", "");
+            View.DragShadowBuilder shadowBuilder = new ShadowBuilder(v);
+            ImageView toyPic = (ImageView) v;
+
+            v.startDrag(clipData, shadowBuilder, toyPic, 0);
+            return true;
+        }
+    };
+
+    private class ShadowBuilder extends View.DragShadowBuilder{
+        private Drawable dragShadow;
+
+        public ShadowBuilder(View v){
+            super(v);
+            dragShadow = new ColorDrawable(Color.LTGRAY);
+        }
+
+        @Override
+        public void onDrawShadow(Canvas canvas){
+            dragShadow.draw(canvas);
+        }
+
+        @Override
+        public void onProvideShadowMetrics(Point shadowSize, Point shadowTouchPoint){
+            int height, width;
+            height = (int) getView().getHeight() / 2;
+            width = (int) getView().getWidth() / 2;
+
+            dragShadow.setBounds(0, 0, width, height);
+
+            shadowSize.set(width, height);
+            shadowTouchPoint.set(width / 2, height / 2);
+        }
+    }
 
     public class Toy
     {
@@ -206,6 +287,11 @@ public class searchActivity extends AppCompatActivity {
             final byte[] imagebuffer=new byte[imageLength];
             toyBuffer.get(imagebuffer, 0, imageLength);
             toyImage= BitmapFactory.decodeByteArray(imagebuffer, 0, imagebuffer.length);
+        }
+
+        public Toy(String name, int price) {
+            toyName = name;
+            toyPrice = price;
         }
     }
 
