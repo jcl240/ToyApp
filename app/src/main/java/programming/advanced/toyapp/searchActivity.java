@@ -151,7 +151,7 @@ public class searchActivity extends AppCompatActivity {
     {
         ToyList toys=new ToyList(toyByte, byteLength);
 
-        if(toys.ToyList.get(0).toyName.contains(searchQuery)) {
+        if(toys.ToyList.get(0).toyName.toLowerCase().contains(searchQuery.toLowerCase())) {
             ImageView view = (ImageView) findViewById(R.id.toyImages);
             view.setImageBitmap(toys.ToyList.get(0).toyImage);
             view.setVisibility(view.VISIBLE);
@@ -162,7 +162,7 @@ public class searchActivity extends AppCompatActivity {
         }
         //Toy1
 
-        if(toys.ToyList.get(1).toyName.contains(searchQuery)) {
+        if(toys.ToyList.get(1).toyName.toLowerCase().contains(searchQuery.toLowerCase())) {
             ImageView view2 = (ImageView) findViewById(R.id.toyImages2);
             view2.setImageBitmap(toys.ToyList.get(1).toyImage);
             view2.setVisibility(view2.VISIBLE);
@@ -172,7 +172,7 @@ public class searchActivity extends AppCompatActivity {
             viewP2.setText(Integer.toString(toys.ToyList.get(1).toyPrice));
         }
         //Toy2
-        if(toys.ToyList.get(2).toyName.contains(searchQuery)) {
+        if(toys.ToyList.get(2).toyName.toLowerCase().contains(searchQuery.toLowerCase())){
             ImageView view3 = (ImageView) findViewById(R.id.toyImages3);
             view3.setImageBitmap(toys.ToyList.get(2).toyImage);
             view3.setVisibility(view3.VISIBLE);
