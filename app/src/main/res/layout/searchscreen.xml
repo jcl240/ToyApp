@@ -43,55 +43,78 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:id="@+id/toyImages"/>
+        android:id="@+id/toyImages"
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_below="@+id/button3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/toyImages"
-        android:id="@+id/toyName"/>
+        android:id="@+id/toyName"
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_below="@+id/toyPrice2"
+        android:layout_toRightOf="@+id/toyImages"
+        android:layout_toEndOf="@+id/toyImages" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/toyImages"
-        android:layout_alignLeft="@id/toyName"
-        android:id="@+id/toyPrice"/>
+        android:id="@+id/toyPrice"
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_below="@+id/button3"
+        android:layout_toRightOf="@+id/toyImages"
+        android:layout_toEndOf="@+id/toyImages" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:id="@+id/toyImages2"/>
+        android:id="@+id/toyImages2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/toyImages2"
-        android:layout_alignRight="@id/toyImages2"
-        android:id="@+id/toyName2"/>
+        android:id="@+id/toyName2"
+        android:layout_below="@+id/toyImages2"
+        android:layout_alignParentLeft="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/toyImages2"
         android:layout_alignLeft="@id/toyName2"
-        android:id="@+id/toyPrice2"/>
+        android:id="@+id/toyPrice2"
+        android:layout_alignRight="@+id/toyName"
+        android:layout_alignEnd="@+id/toyName" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/toyImages3"
+        android:layout_above="@+id/button2"
+        android:layout_alignRight="@+id/toyImages"
+        android:layout_alignEnd="@+id/toyImages"
+        android:layout_marginBottom="69dp"
         android:layout_alignParentLeft="true"
-        android:id="@+id/toyImages3"/>
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/toyImages3"
-        android:id="@+id/toyName3"/>
+        android:id="@+id/toyName3"
+        android:layout_above="@+id/toyImages3"
+        android:layout_alignRight="@+id/toyImages"
+        android:layout_alignTop="@+id/toyImages3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/toyImages3"
-        android:layout_alignLeft="@id/toyName3"
-        android:id="@+id/toyPrice3"/>
+        android:id="@+id/toyPrice3"
+        android:layout_above="@+id/toyName3"
+        android:layout_alignRight="@+id/toyImages"
+        android:layout_alignTop="@+id/toyName3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
