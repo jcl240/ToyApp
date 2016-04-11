@@ -209,16 +209,19 @@ public class searchActivity extends AppCompatActivity {
                     if (draggedImage == findViewById(R.id.toyImages)) {
                         Toy newItem = new Toy(inventory.ToyList.get(0).toyName, inventory.ToyList.get(0).toyPrice);
                         cart.add(newItem);
+                        System.out.print(cart.get(0).toyName);
                     }
 
                     if (draggedImage == findViewById(R.id.toyImages2)) {
                         Toy newItem = new Toy(inventory.ToyList.get(1).toyName, inventory.ToyList.get(1).toyPrice);
                         cart.add(newItem);
+                        System.out.print(cart.get(0).toyName);
                     }
 
                     if (draggedImage == findViewById(R.id.toyImages3)) {
                         Toy newItem = new Toy(inventory.ToyList.get(2).toyName, inventory.ToyList.get(3).toyPrice);
                         cart.add(newItem);
+                        System.out.print(cart.get(0).toyName);
                     }
 
                     Toast.makeText(searchActivity.this, "Item added to cart!", Toast.LENGTH_SHORT).show();
